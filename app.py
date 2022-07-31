@@ -10,19 +10,27 @@ app = Flask(__name__, static_folder='dinner/build', static_url_path="/")
 #     return send_from_directory(app.static_folder, 'index.html')
 
 
-@app.route('/test')
+@app.route('/test', methods=['POST'])
 def test():
     j = request.get_json()
     print(j)
     return "Test page"
 
 
-@app.route('/api', methods=['GET'])
+@app.route('/data')
+def get_time():
+  
+    # Returning an api for showing in  reactjs
+    return {
+        "last": "Meline"
+        }
+
+
+@app.route('/api', methods=['POST'])
 def api():
     r = request.get_json()
-    os.system("echo {} > log.txt".format(r))
-    # if r.strip().lower() == "colby":
-    #     return json.dumps({"msg": "Meline"})
+    if r["first"].strip().lower() == "colby":
+        return json.dumps({"msg": "Meline"})
     return json.dumps({"msg": "User Not Found"})
 
 
