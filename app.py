@@ -26,7 +26,7 @@ def get_time():
         }
 
 
-@app.route('/api', methods=['POST'])
+@app.route('/api', methods=["GET", "POST"])
 def api():
     r = request.get_json()
     if r["first"].strip().lower() == "colby":
